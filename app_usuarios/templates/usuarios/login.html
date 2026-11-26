@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+
+            background:
+                radial-gradient(ellipse at 15% 20%, #315eaa 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 80%, #573a91 0%, transparent 45%),
+                #101729;
+        }
+
+        /* Luces decorativas del fondo */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .orb-one {
+            width: 220px;
+            height: 220px;
+            background: rgba(57, 132, 255, 0.35);
+            top: 10%;
+            left: 12%;
+        }
+
+        .orb-two {
+            width: 260px;
+            height: 260px;
+            background: rgba(151, 91, 255, 0.30);
+            bottom: 8%;
+            right: 12%;
+        }
+
+        /* Tarjeta de cristal */
+        .login-card {
+            position: relative;
+            z-index: 2;
+
+            width: 400px;
+            max-width: calc(100% - 35px);
+            padding: 45px 38px;
+
+            background: rgba(255, 255, 255, 0.09);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+            color: white;
+        }
+
+        /* Logo */
+        .logo {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: 0 auto 25px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.25),
+                rgba(255, 255, 255, 0.05)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        /* Título */
+        h2 {
+            text-align: center;
+            font-size: 29px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #c2cee2;
+            font-size: 14px;
+            margin: 10px 0 32px;
+        }
+
+        /* Etiquetas */
+        label {
+            display: block;
+            margin-bottom: 9px;
+            color: #e3eaf7;
+            font-size: 13px;
+        }
+
+        /* Campos */
+        .form-control {
+            height: 50px;
+            padding: 12px 15px;
+
+            color: white !important;
+            background: rgba(10, 20, 40, 0.28) !important;
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+        }
+
+        .form-control::placeholder {
+            color: #aab8ce;
+        }
+
+        .form-control:focus {
+            border-color: #9bbdff;
+            box-shadow: 0 0 0 3px rgba(105, 153, 255, 0.15);
+            background: rgba(10, 20, 40, 0.45) !important;
+            outline: none;
+        }
+
+        /* Botón */
+        .btn-login {
+            width: 100%;
+            height: 50px;
+            margin-top: 15px;
+
+            border: none;
+            border-radius: 12px;
+
+            color: #17294a;
+
+            background: linear-gradient(
+                110deg,
+                #ffffff,
+                #d6e4ff
+            );
+
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(150, 190, 255, 0.2);
+            background: white;
+        }
+
+        /* Errores */
+        .error {
+            padding: 12px;
+            border-radius: 10px;
+
+            color: #ffd4d4;
+            background: rgba(255, 75, 75, 0.15);
+
+            border: 1px solid rgba(255, 100, 100, 0.25);
+
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* Pie */
+        .footer {
+            margin-top: 28px;
+            text-align: center;
+            color: #a8b8d0;
+            font-size: 12px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Luces del fondo -->
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+
+    <!-- Tarjeta principal -->
+    <div class="login-card">
+
+        <div class="logo">✦</div>
+
+        <h2>Bienvenido</h2>
+
+        <p class="subtitle">
+            Accede a tu cuenta para continuar
+        </p>
+
+        {% if error %}
+            <div class="error mb-3">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <!-- Formulario -->
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+
+                <label>Nombre de usuario</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="Ingresa tu usuario"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Contraseña</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button type="submit" class="btn-login">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <div class="footer">
+            Sistema de acceso seguro
+        </div>
+
+    </div>
+
+</body>
+
+</html>

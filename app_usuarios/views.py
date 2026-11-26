@@ -1,0 +1,109 @@
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.views.decorators.cache import never_cache
+from django.views.decorators.http import require_POST
+
+
+# Redirigir según el grupo del usuario
+def redireccionar_grupo(user):
+
+    if user.groups.filter(name="Administrador").exists():
+        return redirect("admin_dashboard")
+
+    elif user.groups.filter(name="Vendedor").exists():
+        return redirect("vendedor_dashboard")
+
+    elif user.groups.filter(name="Cliente").exists():
+        return redirect("cliente_dashboard")
+
+    return None
+
+
+# Inicio de sesión
+@never_cache
+def iniciar_sesion(request):
+
+    if request.user.is_authenticated:
+        respuesta = redireccionar_grupo(request.user)
+
+        if respuesta:
+            return respuesta
+
+    if request.method == "POST":
+
+        usuario = request.POST.get("username")
+        contrasena = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=usuario,
+            password=contrasena
+        )
+
+        if user is not None:
+
+            login(request, user)
+
+            respuesta = redireccionar_grupo(user)
+
+            if respuesta:
+                return respuesta
+
+            logout(request)
+
+            return render(request, "usuarios/login.html", {
+                "error": "El usuario no tiene un grupo asignado."
+            })
+
+        return render(request, "usuarios/login.html", {
+            "error": "Usuario o contraseña incorrectos."
+        })
+
+    return render(request, "usuarios/login.html")
+
+
+# Panel del administrador
+@login_required
+@never_cache
+def admin_dashboard(request):
+
+    if not request.user.groups.filter(name="Administrador").exists():
+        raise PermissionDenied
+
+    return render(request, "usuarios/admin_dashboard.html")
+
+
+# Panel del vendedor
+@login_required
+@never_cache
+def vendedor_dashboard(request):
+
+    if not request.user.groups.filter(name="Vendedor").exists():
+        raise PermissionDenied
+
+    return render(request, "usuarios/vendedor_dashboard.html")
+
+
+# Panel del cliente
+@login_required
+@never_cache
+def cliente_dashboard(request):
+
+    if not request.user.groups.filter(name="Cliente").exists():
+        raise PermissionDenied
+
+    return render(request, "usuarios/cliente_dashboard.html")
+
+
+# Cerrar sesión
+@require_POST
+@login_required
+@never_cache
+def cerrar_sesion(request):
+
+    logout(request)
+
+    return redirect("iniciar_sesion")
