@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar sesiones</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #eef2f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            max-width: 950px;
+            margin: 60px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #243b53;
+            font-weight: bold;
+        }
+
+        .table thead {
+            background: #243b53;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h2 class="mb-2">Sesiones activas</h2>
+        <p class="text-secondary mb-4">
+            Consulta las sesiones registradas en el sistema.
+        </p>
+
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Fecha de expiración</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for sesion in sesiones %}
+                <tr>
+                    <td>{{ sesion.session_key }}</td>
+                    <td>{{ sesion.expire_date|date:"d/m/Y H:i" }}</td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center">
+                        No hay sesiones activas.
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">
+            Volver al panel
+        </a>
+
+    </div>
+
+</body>
+</html>

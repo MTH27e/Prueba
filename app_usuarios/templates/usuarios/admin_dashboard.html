@@ -1,20 +1,168 @@
-<h1>Panel de Administrador</h1>
 
-<p>Bienvenido, {{ request.user.username }}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
 
-<a href="{% url 'ver_usuarios' %}">
-    Consultar usuarios
-</a>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
-<a href="{% url 'consultar_grupos' %}">
-    Consultar grupos
-</a>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            background:
+                radial-gradient(circle at 15% 20%, #315eaa, transparent 35%),
+                radial-gradient(circle at 85% 80%, #573a91, transparent 35%),
+                linear-gradient(135deg, #101729, #172c49, #101729);
+        }
 
-<a href="{% url 'consultar_sesion' %}">
-    Consultar sesión
-</a>
+        .panel {
+            width: 100%;
+            max-width: 650px;
+            padding: 40px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+            text-align: center;
+        }
 
-<form method="POST" action="{% url 'cerrar_sesion' %}">
-    {% csrf_token %}
-    <button type="submit">Cerrar sesión</button>
-</form>
+        .icono {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin-bottom: 12px;
+            font-size: 29px;
+        }
+
+        .bienvenida {
+            color: #c5d5eb;
+            margin-bottom: 30px;
+        }
+
+        .opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .opcion {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px;
+            text-align: left;
+            text-decoration: none;
+            color: white;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.13);
+            transition: 0.3s;
+        }
+
+        .opcion:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-3px);
+        }
+
+        .opcion-icono {
+            font-size: 27px;
+            width: 45px;
+            text-align: center;
+        }
+
+        .opcion p {
+            color: #b9c9dd;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .cerrar {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2879c9, #6949b5);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .cerrar:hover {
+            opacity: 0.85;
+        }
+
+        @media(max-width: 500px) {
+            .panel {
+                padding: 25px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="panel">
+
+        <div class="icono">♛</div>
+
+        <h1>Panel de Administrador</h1>
+
+        <p class="bienvenida">
+            Bienvenido, {{ request.user.username }}
+            <br>
+            Administra los usuarios, grupos y sesiones del sistema.
+        </p>
+
+        <div class="opciones">
+
+            <a href="{% url 'ver_usuarios' %}" class="opcion">
+                <div class="opcion-icono">♙</div>
+                <div>
+                    <h3>Consultar usuarios</h3>
+                    <p>Visualizar los usuarios registrados.</p>
+                </div>
+            </a>
+
+            <a href="{% url 'consultar_grupos' %}" class="opcion">
+                <div class="opcion-icono">♧</div>
+                <div>
+                    <h3>Consultar grupos</h3>
+                    <p>Revisar los grupos y sus permisos.</p>
+                </div>
+            </a>
+
+            <a href="{% url 'consultar_sesion' %}" class="opcion">
+                <div class="opcion-icono">◷</div>
+                <div>
+                    <h3>Consultar sesión</h3>
+                    <p>Consultar las sesiones del sistema.</p>
+                </div>
+            </a>
+
+        </div>
+
+        <form method="POST" action="{% url 'cerrar_sesion' %}">
+            {% csrf_token %}
+            <button type="submit" class="cerrar">Cerrar sesión</button>
+        </form>
+
+    </main>
+
+</body>
+</html>

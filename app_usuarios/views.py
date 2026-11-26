@@ -2,7 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
+from django.contrib.sessions.models import Session
 from django.core.exceptions import PermissionDenied
+from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_POST
 
@@ -74,6 +77,53 @@ def admin_dashboard(request):
         raise PermissionDenied
 
     return render(request, "usuarios/admin_dashboard.html")
+
+
+# Consultar usuarios
+@login_required
+@never_cache
+def ver_usuarios(request):
+
+    if not request.user.groups.filter(name="Administrador").exists():
+        raise PermissionDenied
+
+    usuarios = User.objects.all().prefetch_related("groups")
+
+    return render(request, "usuarios/ver_usuarios.html", {
+        "usuarios": usuarios
+    })
+
+
+# Consultar grupos
+@login_required
+@never_cache
+def consultar_grupos(request):
+
+    if not request.user.groups.filter(name="Administrador").exists():
+        raise PermissionDenied
+
+    grupos = Group.objects.all().prefetch_related("user_set")
+
+    return render(request, "usuarios/consultar_grupos.html", {
+        "grupos": grupos
+    })
+
+
+# Consultar sesiones
+@login_required
+@never_cache
+def consultar_sesion(request):
+
+    if not request.user.groups.filter(name="Administrador").exists():
+        raise PermissionDenied
+
+    sesiones = Session.objects.filter(
+        expire_date__gte=timezone.now()
+    )
+
+    return render(request, "usuarios/consultar_sesion.html", {
+        "sesiones": sesiones
+    })
 
 
 # Panel del vendedor
