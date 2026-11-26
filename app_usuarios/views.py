@@ -35,6 +35,8 @@ def iniciar_sesion(request):
         if respuesta:
             return respuesta
 
+        logout(request)
+
     if request.method == "POST":
 
         usuario = request.POST.get("username")
@@ -69,8 +71,8 @@ def iniciar_sesion(request):
 
 
 # Panel del administrador
-@login_required
 @never_cache
+@login_required
 def admin_dashboard(request):
 
     if not request.user.groups.filter(name="Administrador").exists():
@@ -80,8 +82,8 @@ def admin_dashboard(request):
 
 
 # Consultar usuarios
-@login_required
 @never_cache
+@login_required
 def ver_usuarios(request):
 
     if not request.user.groups.filter(name="Administrador").exists():
@@ -95,8 +97,8 @@ def ver_usuarios(request):
 
 
 # Consultar grupos
-@login_required
 @never_cache
+@login_required
 def consultar_grupos(request):
 
     if not request.user.groups.filter(name="Administrador").exists():
@@ -110,8 +112,8 @@ def consultar_grupos(request):
 
 
 # Consultar sesiones
-@login_required
 @never_cache
+@login_required
 def consultar_sesion(request):
 
     if not request.user.groups.filter(name="Administrador").exists():
@@ -127,8 +129,8 @@ def consultar_sesion(request):
 
 
 # Panel del vendedor
-@login_required
 @never_cache
+@login_required
 def vendedor_dashboard(request):
 
     if not request.user.groups.filter(name="Vendedor").exists():
@@ -138,8 +140,8 @@ def vendedor_dashboard(request):
 
 
 # Panel del cliente
-@login_required
 @never_cache
+@login_required
 def cliente_dashboard(request):
 
     if not request.user.groups.filter(name="Cliente").exists():
@@ -149,11 +151,11 @@ def cliente_dashboard(request):
 
 
 # Cerrar sesión
+@never_cache
 @require_POST
 @login_required
-@never_cache
 def cerrar_sesion(request):
 
     logout(request)
 
-    return redirect("iniciar_sesion")
+    return redirect("autenticacion")

@@ -128,3 +128,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+#AUTENTICACION:
+
+#LOGIN_URL: página a la que se envía a quien no está autenticado.
+#LOGIN_REDIRECT_URL: destino después de iniciar sesión.
+#LOGOUT_REDIRECT_URL: destino después de cerrar sesión.
+LOGIN_URL = 'autenticacion'
+LOGIN_REDIRECT_URL = 'autenticacion'
+LOGOUT_REDIRECT_URL = 'autenticacion'
+
