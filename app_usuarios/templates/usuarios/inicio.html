@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+<body>
+
+    <h1>Bienvenido al sistema</h1>
+
+    <p>Usuario: {{ request.user.username }}</p>
+
+    <h2>Opciones disponibles</h2>
+
+    <ul>
+        <li>
+            <a href="{% url 'consultar_grupos' %}">
+                Consultar mis grupos
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'consultar_sesion' %}">
+                Consultar mi sesión
+            </a>
+        </li>
+    </ul>
+
+    <form method="POST" action="{% url 'cerrar_sesion' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+
+</body>
+</html>

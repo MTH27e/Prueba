@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Grupos del usuario</title>
+</head>
+<body>
+
+    <h1>Mis grupos</h1>
+
+    <p>Usuario: {{ request.user.username }}</p>
+
+    <h2>Grupos asignados</h2>
+
+    <ul>
+
+        {% for grupo in grupos %}
+
+            <li>{{ grupo.name }}</li>
+
+        {% empty %}
+
+            <li>No perteneces a ningún grupo.</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+
+</body>
+</html>

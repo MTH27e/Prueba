@@ -1,0 +1,20 @@
+<h1>Panel de Administrador</h1>
+
+<p>Bienvenido, {{ request.user.username }}</p>
+
+<a href="{% url 'ver_usuarios' %}">
+    Consultar usuarios
+</a>
+
+<a href="{% url 'consultar_grupos' %}">
+    Consultar grupos
+</a>
+
+<a href="{% url 'consultar_sesion' %}">
+    Consultar sesión
+</a>
+
+<form method="POST" action="{% url 'cerrar_sesion' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar sesión</button>
+</form>

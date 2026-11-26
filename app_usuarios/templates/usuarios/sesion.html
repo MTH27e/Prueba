@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información de sesión</title>
+</head>
+<body>
+
+    <h1>Información de la sesión</h1>
+
+    <p>
+        <strong>Usuario:</strong>
+        {{ datos.usuario }}
+    </p>
+
+    <p>
+        <strong>ID de sesión:</strong>
+        {{ datos.id }}
+    </p>
+
+    <p>
+        <strong>Última actividad:</strong>
+        {{ datos.ultima_actividad }}
+    </p>
+
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+
+</body>
+</html>
