@@ -1,5 +1,5 @@
 
-/* CONFIGURACIÓN GENERAL */
+/* Configuración general */
 
 * {
     margin: 0;
@@ -8,7 +8,20 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* FONDO GENERAL */
+:root {
+    --azul-pastel: #94B1FC;
+    --azul-claro: #89AFF1;
+    --azul-medio: #6DADEE;
+    --azul-oscuro: #3061A5;
+    --morado: #8060CA;
+    --lavanda: #B28BFF;
+    --blanco: #FFFFFF;
+    --texto-secundario: #C5D5EB;
+    --fondo-oscuro: #101729;
+    --dorado: #D6AD55;
+}
+
+/* Fondo general */
 
 body {
     min-height: 100vh;
@@ -16,12 +29,12 @@ body {
     color: white;
 
     background:
-        radial-gradient(circle at 15% 20%, #89aff1, transparent 35%),
-        radial-gradient(circle at 85% 80%, #b28bff, transparent 35%),
-        linear-gradient(135deg, #94b1fc, #3061a5, #101729);
+        radial-gradient(circle at 15% 20%, #89AFF1, transparent 35%),
+        radial-gradient(circle at 85% 80%, #B28BFF, transparent 35%),
+        linear-gradient(135deg, #94B1FC, #3061A5, #101729);
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* Contenedor principal */
 
 .contenedor {
     width: 100%;
@@ -29,7 +42,7 @@ body {
     margin: auto;
 }
 
-/* PANEL GLASSMORPHISM */
+/* Panel principal */
 
 .panel {
     width: 100%;
@@ -38,16 +51,18 @@ body {
     padding: 40px;
 
     border-radius: 25px;
-    background: rgba(255,255,255,0.09);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
     box-shadow: 0 15px 45px rgba(255, 213, 213, 0.3);
 
     text-align: center;
 }
 
-/* LOGO */
+/* Logo */
 
 .logo {
     width: 110px;
@@ -56,32 +71,59 @@ body {
     margin-bottom: 15px;
 }
 
-/* ICONOS */
-
-.icono {
-    font-size: 45px;
-    margin-bottom: 15px;
+.logo img {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
 }
 
-/* TÍTULOS */
+/* Iconos de los usuarios */
+
+.icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 90px;
+    margin-bottom: 18px;
+}
+
+.icono img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+
+    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Títulos */
 
 h1 {
     margin-bottom: 12px;
     font-size: 29px;
+    color: white;
 }
 
 h2 {
     margin-bottom: 15px;
+    color: white;
 }
 
-.bienvenida {
-    color: #c5d5eb;
+h3 {
+    color: white;
+}
+
+.bienvenida,
+.panel-header p {
+    color: var(--texto-secundario);
     margin-bottom: 30px;
+    line-height: 1.6;
 }
 
-/* OPCIONES DEL PANEL */
+/* Opciones del panel */
 
-.opciones {
+.opciones,
+.opciones-panel {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -99,33 +141,37 @@ h2 {
     color: white;
 
     border-radius: 15px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.13);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.13);
 
     transition: 0.3s;
 }
 
 .opcion:hover {
-    background: rgba(255,255,255,0.16);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-3px);
 }
 
 .opcion-icono {
     font-size: 27px;
     width: 45px;
+    min-width: 45px;
     text-align: center;
+    color: var(--dorado);
 }
 
 .opcion p {
-    color: #b9c9dd;
+    color: #B9C9DD;
     font-size: 13px;
     margin-top: 5px;
 }
 
-/* BOTONES */
+/* Botones */
 
 .boton,
-.cerrar {
+.cerrar,
+.btn-login {
     display: inline-block;
     width: 100%;
     margin-top: 15px;
@@ -134,10 +180,12 @@ h2 {
     border: none;
     border-radius: 12px;
 
-    background: linear-gradient(135deg, #6dadee, #8060ca);
+    background: linear-gradient(135deg, #6DADEE, #8060CA);
 
     color: white;
     font-size: 15px;
+    font-weight: 600;
+
     text-align: center;
     text-decoration: none;
 
@@ -146,17 +194,22 @@ h2 {
 }
 
 .boton:hover,
-.cerrar:hover {
+.cerrar:hover,
+.btn-login:hover {
     opacity: 0.85;
     transform: translateY(-2px);
 }
 
-/* FORMULARIOS */
+.boton-salir {
+    background: linear-gradient(135deg, #A76F91, #8060CA);
+}
+
+/* Formularios */
 
 form p {
     margin-bottom: 18px;
     text-align: left;
-    color: #98c0f5;
+    color: #98C0F5;
 }
 
 input,
@@ -167,17 +220,32 @@ textarea {
     margin-top: 8px;
 
     color: white;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #9BBDFF;
+    box-shadow: 0 0 0 3px rgba(105, 153, 255, 0.15);
 }
 
 input[type="file"] {
     cursor: pointer;
 }
 
-/* TARJETAS DE PELÍCULAS */
+/* Opciones de los campos */
+
+select option {
+    color: #17233D;
+    background: white;
+}
+
+/* Tarjetas de películas */
 
 .peliculas {
     display: grid;
@@ -189,15 +257,15 @@ input[type="file"] {
     overflow: hidden;
     border-radius: 17px;
 
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 
     transition: 0.3s;
 }
 
 .pelicula:hover {
     transform: translateY(-5px);
-    background: rgba(255,255,255,0.13);
+    background: rgba(255, 255, 255, 0.13);
 }
 
 .pelicula img {
@@ -212,31 +280,234 @@ input[type="file"] {
     text-align: center;
 }
 
-/* MENSAJES */
+/* Mensajes */
 
 .mensaje {
     padding: 20px;
-    color: #c5d5eb;
+    color: var(--texto-secundario);
     text-align: center;
 }
 
 .errorlist {
-    color: #ffaaaa;
+    color: #FFAAAA;
     list-style: none;
     margin: 8px 0;
 }
 
-/* ENLACES */
+/* Enlaces */
 
 .volver {
     display: block;
     margin-top: 20px;
-    color: #c5d5eb;
+    color: #C5D5EB;
     text-align: center;
     text-decoration: none;
 }
 
-/* DISEÑO RESPONSIVE */
+.volver:hover {
+    color: white;
+}
+
+/* Inicio de sesión */
+
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+    padding: 25px;
+
+    background:
+        radial-gradient(ellipse at 15% 20%, #315EAA 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 80%, #573A91 0%, transparent 45%),
+        #101729;
+}
+
+/* Luces del fondo */
+
+.orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+.orb-one {
+    width: 220px;
+    height: 220px;
+    background: rgba(57, 132, 255, 0.35);
+    top: 10%;
+    left: 12%;
+}
+
+.orb-two {
+    width: 260px;
+    height: 260px;
+    background: rgba(151, 91, 255, 0.30);
+    bottom: 8%;
+    right: 12%;
+}
+
+/* Tarjeta de inicio de sesión */
+
+.login-card {
+    position: relative;
+    z-index: 2;
+
+    width: 400px;
+    max-width: calc(100% - 10px);
+
+    padding: 45px 38px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+    color: white;
+}
+
+/* Logo del inicio de sesión */
+
+.login-card .logo {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 25px;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, 0.05)
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.login-card .logo img {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Título del inicio de sesión */
+
+.login-card h2 {
+    text-align: center;
+    font-size: 29px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+}
+
+.subtitle {
+    text-align: center;
+    color: #C2CEE2;
+    font-size: 14px;
+    margin: 10px 0 32px;
+}
+
+/* Etiquetas del formulario */
+
+.login-card label {
+    display: block;
+    margin-bottom: 9px;
+    color: #E3EAF7;
+    font-size: 13px;
+}
+
+/* Campos del inicio de sesión */
+
+.login-card .form-control {
+    height: 50px;
+    padding: 12px 15px;
+
+    color: white !important;
+    background: rgba(10, 20, 40, 0.28) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+}
+
+.login-card .form-control::placeholder {
+    color: #AAB8CE;
+}
+
+.login-card .form-control:focus {
+    border-color: #9BBDFF;
+    box-shadow: 0 0 0 3px rgba(105, 153, 255, 0.15);
+    background: rgba(10, 20, 40, 0.45) !important;
+    outline: none;
+}
+
+/* Botón del inicio de sesión */
+
+.login-card .btn-login {
+    height: 50px;
+    margin-top: 15px;
+
+    border: none;
+    border-radius: 12px;
+
+    color: #17294A;
+
+    background: linear-gradient(
+        110deg,
+        #FFFFFF,
+        #D6E4FF
+    );
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.login-card .btn-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(150, 190, 255, 0.2);
+    background: white;
+}
+
+/* Errores del inicio de sesión */
+
+.error {
+    padding: 12px;
+    border-radius: 10px;
+
+    color: #FFD4D4;
+    background: rgba(255, 75, 75, 0.15);
+
+    border: 1px solid rgba(255, 100, 100, 0.25);
+
+    text-align: center;
+    font-size: 13px;
+}
+
+/* Pie del inicio de sesión */
+
+.footer {
+    margin-top: 28px;
+    text-align: center;
+    color: #A8B8D0;
+    font-size: 12px;
+}
+
+/* Diseño para celulares */
 
 @media (max-width: 500px) {
 
@@ -254,5 +525,21 @@ input[type="file"] {
 
     .pelicula img {
         height: 250px;
+    }
+
+    .login-body {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 35px 22px;
+    }
+
+    .orb-one {
+        left: -80px;
+    }
+
+    .orb-two {
+        right: -100px;
     }
 }

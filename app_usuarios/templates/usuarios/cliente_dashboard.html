@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -8,7 +9,12 @@
 
     <title>Panel del Cliente</title>
 
-    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <link rel="icon" type="image/svg+xml"
+          href="{% static 'app_usuarios/img/icono_cliente.svg' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'app_usuarios/css/estilos.css' %}">
+
     <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
 </head>
 
@@ -18,7 +24,11 @@
 
         <section class="panel">
 
-            <div class="icono">C</div>
+            <div class="icono">
+                <img src="{% static 'app_usuarios/img/icono_cliente.svg' %}"
+                     alt="Icono de cliente"
+                     width="90">
+            </div>
 
             <h1>Panel del Cliente</h1>
 

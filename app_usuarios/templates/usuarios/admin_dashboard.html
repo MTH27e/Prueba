@@ -9,7 +9,12 @@
 
     <title>Panel del Administrador</title>
 
-    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <link rel="icon" type="image/svg+xml"
+          href="{% static 'app_usuarios/img/icono_admin.svg' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'app_usuarios/css/estilos.css' %}">
+
     <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
 </head>
 
@@ -19,7 +24,10 @@
 
         <section class="panel">
 
-            <div class="icono">A</div>
+            <div class="icono">
+                <img src="{% static 'app_usuarios/img/icono_admin.svg' %}"
+                     alt="Escudo de administrador">
+            </div>
 
             <h1>Panel del Administrador</h1>
 

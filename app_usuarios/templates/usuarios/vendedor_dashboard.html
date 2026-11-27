@@ -9,16 +9,27 @@
 
     <title>Panel del Vendedor</title>
 
-    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <link rel="icon" type="image/svg+xml"
+          href="{% static 'app_usuarios/img/icono_vendedor.svg' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'app_usuarios/css/estilos.css' %}">
+
+    <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
 </head>
 
 <body>
 
     <main class="contenedor">
 
-        <section class="panel">
+        <section class="panel">s
 
             <header class="panel-header">
+
+                <div class="icono">
+                    <img src="{% static 'app_usuarios/img/icono_vendedor.svg' %}"
+                         alt="Icono de vendedor">
+                </div>
 
                 <h1>Panel del Vendedor</h1>
 
@@ -39,7 +50,9 @@
 
             </div>
 
-            <form action="{% url 'cerrar_sesion' %}" method="POST">
+            <form action="{% url 'cerrar_sesion' %}" method="POST"
+                  onsubmit="return confirmarCierre();">
+
                 {% csrf_token %}
 
                 <button type="submit" class="boton boton-salir">
