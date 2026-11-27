@@ -1,166 +1,92 @@
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administrador</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+    <title>Panel del Administrador</title>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: white;
-            background:
-                radial-gradient(circle at 15% 20%, #315eaa, transparent 35%),
-                radial-gradient(circle at 85% 80%, #573a91, transparent 35%),
-                linear-gradient(135deg, #101729, #172c49, #101729);
-        }
-
-        .panel {
-            width: 100%;
-            max-width: 650px;
-            padding: 40px;
-            border-radius: 25px;
-            background: rgba(255,255,255,0.09);
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .icono {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            margin-bottom: 12px;
-            font-size: 29px;
-        }
-
-        .bienvenida {
-            color: #c5d5eb;
-            margin-bottom: 30px;
-        }
-
-        .opciones {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .opcion {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 18px;
-            text-align: left;
-            text-decoration: none;
-            color: white;
-            border-radius: 15px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.13);
-            transition: 0.3s;
-        }
-
-        .opcion:hover {
-            background: rgba(255,255,255,0.16);
-            transform: translateY(-3px);
-        }
-
-        .opcion-icono {
-            font-size: 27px;
-            width: 45px;
-            text-align: center;
-        }
-
-        .opcion p {
-            color: #b9c9dd;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .cerrar {
-            width: 100%;
-            margin-top: 25px;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #2879c9, #6949b5);
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-        }
-
-        .cerrar:hover {
-            opacity: 0.85;
-        }
-
-        @media(max-width: 500px) {
-            .panel {
-                padding: 25px 18px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
 </head>
 
 <body>
 
-    <main class="panel">
+    <main class="contenedor">
 
-        <div class="icono">♛</div>
+        <section class="panel">
 
-        <h1>Panel de Administrador</h1>
+            <div class="icono">A</div>
 
-        <p class="bienvenida">
-            Bienvenido, {{ request.user.username }}
-            <br>
-            Administra los usuarios, grupos y sesiones del sistema.
-        </p>
+            <h1>Panel del Administrador</h1>
 
-        <div class="opciones">
+            <h2>Bienvenido, {{ request.user.username }}</h2>
 
-            <a href="{% url 'ver_usuarios' %}" class="opcion">
-                <div class="opcion-icono">♙</div>
-                <div>
-                    <h3>Consultar usuarios</h3>
-                    <p>Visualizar los usuarios registrados.</p>
-                </div>
-            </a>
+            <p class="bienvenida">
+                Desde este panel puedes administrar los usuarios,
+                consultar grupos, revisar sesiones y gestionar
+                las películas de la cartelera.
+            </p>
 
-            <a href="{% url 'consultar_grupos' %}" class="opcion">
-                <div class="opcion-icono">♧</div>
-                <div>
-                    <h3>Consultar grupos</h3>
-                    <p>Revisar los grupos y sus permisos.</p>
-                </div>
-            </a>
+            <div class="opciones">
 
-            <a href="{% url 'consultar_sesion' %}" class="opcion">
-                <div class="opcion-icono">◷</div>
-                <div>
-                    <h3>Consultar sesión</h3>
-                    <p>Consultar las sesiones del sistema.</p>
-                </div>
-            </a>
+                <a href="{% url 'ver_usuarios' %}" class="opcion">
+                    <div class="opcion-icono">U</div>
+                    <div>
+                        <h3>Consultar usuarios</h3>
+                        <p>Visualizar los usuarios registrados.</p>
+                    </div>
+                </a>
 
-        </div>
+                <a href="{% url 'consultar_grupos' %}" class="opcion">
+                    <div class="opcion-icono">G</div>
+                    <div>
+                        <h3>Consultar grupos</h3>
+                        <p>Consultar los grupos y sus integrantes.</p>
+                    </div>
+                </a>
 
-        <form method="POST" action="{% url 'cerrar_sesion' %}">
-            {% csrf_token %}
-            <button type="submit" class="cerrar">Cerrar sesión</button>
-        </form>
+                <a href="{% url 'consultar_sesion' %}" class="opcion">
+                    <div class="opcion-icono">S</div>
+                    <div>
+                        <h3>Consultar sesiones</h3>
+                        <p>Revisar las sesiones activas.</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'cartelera:guardar_pelicula' %}" class="opcion">
+                    <div class="opcion-icono">+</div>
+                    <div>
+                        <h3>Guardar películas</h3>
+                        <p>Registrar películas e imágenes en la cartelera.</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'cartelera:ver_peliculas' %}" class="opcion">
+                    <div class="opcion-icono">C</div>
+                    <div>
+                        <h3>Consultar cartelera</h3>
+                        <p>Visualizar las películas disponibles.</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <form action="{% url 'cerrar_sesion' %}" method="POST"
+                  onsubmit="return confirmarCierre();">
+
+                {% csrf_token %}
+
+                <button type="submit" class="cerrar">
+                    Cerrar sesión
+                </button>
+
+            </form>
+
+        </section>
 
     </main>
 

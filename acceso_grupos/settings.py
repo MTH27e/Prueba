@@ -142,7 +142,7 @@ LOGIN_URL = 'autenticacion'
 LOGIN_REDIRECT_URL = 'autenticacion'
 LOGOUT_REDIRECT_URL = 'autenticacion'
 
-
+# Archivos multimedia de las películas
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

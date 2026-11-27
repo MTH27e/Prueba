@@ -1,0 +1,101 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartelera | Cine</title>
+
+    <link rel="stylesheet" href="{% static 'app_cartelera/css/cartelera.css' %}">
+</head>
+
+<body>
+
+    <main class="cine-contenedor">
+
+        <header class="cine-header">
+
+            <div class="cine-marca">
+                EXPERIENCIA CINEMATOGRÁFICA
+            </div>
+
+            <h1>CARTELERA</h1>
+
+            <p>Descubre las películas disponibles y disfruta del cine.</p>
+
+            <div class="cine-linea"></div>
+
+        </header>
+
+       <div class="cine-acciones">
+
+        {% if puede_guardar %}
+            <a href="{% url 'cartelera:guardar_pelicula' %}"
+            class="cine-boton cine-boton-dorado">
+            + Registrar película
+        </a>
+        {% endif %}
+
+        <a href="{{ url_volver }}" class="cine-boton cine-boton-verde">
+            Volver al panel
+        </a>
+
+    </div>
+        <section class="peliculas-grid">
+
+            {% for pelicula in peliculas %}
+
+                <article class="pelicula-card">
+
+                    {% if pelicula.imagen %}
+
+                        <img
+                            src="{{ pelicula.imagen.url }}"
+                            alt="Póster de {{ pelicula.titulo }}"
+                            class="pelicula-poster"
+                        >
+
+                    {% else %}
+
+                        <div class="pelicula-sin-imagen">
+                            C
+                        </div>
+
+                    {% endif %}
+
+                    <div class="pelicula-info">
+
+                        <h2>{{ pelicula.titulo }}</h2>
+
+                        <span class="pelicula-disponible">
+                            DISPONIBLE
+                        </span>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="cine-vacio">
+
+                    <h2>Cartelera vacía</h2>
+
+                    <p>
+                        Actualmente no hay películas registradas.
+                        Vuelve pronto para descubrir los próximos estrenos.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+</body>
+</html>

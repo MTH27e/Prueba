@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel del Cliente</title>
+
+    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <section class="panel">
+
+            <div class="icono">C</div>
+
+            <h1>Panel del Cliente</h1>
+
+            <h2>Hola, {{ request.user.username }}</h2>
+
+            <p class="bienvenida">
+                Consulta las películas que se encuentran
+                actualmente disponibles en cartelera.
+            </p>
+
+            <div class="opciones">
+
+                <a href="{% url 'cartelera:ver_peliculas' %}" class="opcion">
+
+                    <div class="opcion-icono">P</div>
+
+                    <div>
+                        <h3>Consultar cartelera</h3>
+                        <p>Explorar las películas disponibles.</p>
+                    </div>
+
+                </a>
+
+            </div>
+
+            <form action="{% url 'cerrar_sesion' %}" method="POST"
+                  onsubmit="return confirmarCierre();">
+
+                {% csrf_token %}
+
+                <button type="submit" class="cerrar">
+                    Cerrar sesión
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+/* CONFIGURACIÓN GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* FONDO GENERAL */
+
+body {
+    min-height: 100vh;
+    padding: 25px;
+    color: white;
+
+    background:
+        radial-gradient(circle at 15% 20%, #89aff1, transparent 35%),
+        radial-gradient(circle at 85% 80%, #b28bff, transparent 35%),
+        linear-gradient(135deg, #94b1fc, #3061a5, #101729);
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+.contenedor {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* PANEL GLASSMORPHISM */
+
+.panel {
+    width: 100%;
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 40px;
+
+    border-radius: 25px;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.2);
+
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 45px rgba(255, 213, 213, 0.3);
+
+    text-align: center;
+}
+
+/* LOGO */
+
+.logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* ICONOS */
+
+.icono {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+/* TÍTULOS */
+
+h1 {
+    margin-bottom: 12px;
+    font-size: 29px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.bienvenida {
+    color: #c5d5eb;
+    margin-bottom: 30px;
+}
+
+/* OPCIONES DEL PANEL */
+
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 18px;
+
+    text-align: left;
+    text-decoration: none;
+    color: white;
+
+    border-radius: 15px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.13);
+
+    transition: 0.3s;
+}
+
+.opcion:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-3px);
+}
+
+.opcion-icono {
+    font-size: 27px;
+    width: 45px;
+    text-align: center;
+}
+
+.opcion p {
+    color: #b9c9dd;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* BOTONES */
+
+.boton,
+.cerrar {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #6dadee, #8060ca);
+
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boton:hover,
+.cerrar:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* FORMULARIOS */
+
+form p {
+    margin-bottom: 18px;
+    text-align: left;
+    color: #98c0f5;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+
+    color: white;
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    cursor: pointer;
+}
+
+/* TARJETAS DE PELÍCULAS */
+
+.peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.pelicula {
+    overflow: hidden;
+    border-radius: 17px;
+
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+
+    transition: 0.3s;
+}
+
+.pelicula:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.13);
+}
+
+.pelicula img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    display: block;
+}
+
+.pelicula h3 {
+    padding: 17px;
+    text-align: center;
+}
+
+/* MENSAJES */
+
+.mensaje {
+    padding: 20px;
+    color: #c5d5eb;
+    text-align: center;
+}
+
+.errorlist {
+    color: #ffaaaa;
+    list-style: none;
+    margin: 8px 0;
+}
+
+/* ENLACES */
+
+.volver {
+    display: block;
+    margin-top: 20px;
+    color: #c5d5eb;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* DISEÑO RESPONSIVE */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .panel {
+        padding: 25px 18px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .pelicula img {
+        height: 250px;
+    }
+}

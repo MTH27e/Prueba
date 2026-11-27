@@ -1,0 +1,51 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar película</title>
+
+    <link rel="stylesheet" href="{% static 'app_usuarios/css/estilos.css' %}">
+    <script src="{% static 'app_usuarios/js/funciones.js' %}" defer></script>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <section class="panel">
+
+            <div class="icono">P</div>
+
+            <h1>Registrar película</h1>
+
+            <p class="bienvenida">
+                Agrega una película a la cartelera.
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {{ formulario.as_p }}
+
+                <button type="submit" class="cerrar">
+                    Guardar película
+                </button>
+
+            </form>
+
+            <a href="{% url 'admin_dashboard' %}">
+                Volver al panel principal
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
